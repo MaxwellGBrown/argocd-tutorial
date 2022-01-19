@@ -1,0 +1,21 @@
+apiVersion: "argoproj.io/v1alpha1"
+kind: Application
+metadata:
+  name: myapp
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: "https://github.com/MaxwellGBrown/argocd-tutorial.git"
+    targetRevision: HEAD
+    path: dev  # TODO this path and the configs don't exist here yet
+  destination:
+    # The target cluster to sync with
+    server: https://kubernetes.default.scv  # Alias for local k8s
+    namespace: myapp  # Created automatically w/ syncPolicy.syncOptions CreateNamespace=true
+  syncPolicy:  # Configuration for ArgoCD's gitops-k8s sync
+    syncOptions:
+      - "CreateNamespace=true"
+    automated:
+      selfHeal: true  # will rollback if changed resources fail
+      prune: true  # allows deleting of removed resources
