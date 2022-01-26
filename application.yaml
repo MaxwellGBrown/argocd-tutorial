@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: "https://github.com/MaxwellGBrown/argocd-tutorial.git"
     targetRevision: HEAD
-    path: dev
+    path: apps/myapp
   destination:
     # The target cluster to sync with
     server: https://kubernetes.default.svc  # Alias for local k8s
