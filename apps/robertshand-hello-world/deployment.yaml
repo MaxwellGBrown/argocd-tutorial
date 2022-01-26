@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: robertshand-hello-world
+spec:
+  selector:
+    matchLabels:
+      app: robertshand-hello-world
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: robertshand-hello-world
+        image: robertshand/python-hello-world:latest
+        ports:
+        - containerPort: 80
+
